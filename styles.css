@@ -1,10 +1,14 @@
 /* VITALX — التصميم. الألوان كلها متغيرات هنا في :root */
 :root {
-  --bg: #070b16;
-  --bg-alt: #0b1122;
-  --panel: #111a31;
-  --panel-2: #16213d;
-  --line: #24314f;
+  --bg: #050914;
+  --bg-alt: rgba(255,255,255,.025);
+  --panel: rgba(255,255,255,.055);
+  --panel-2: rgba(255,255,255,.085);
+  --line: rgba(255,255,255,.13);
+  /* النمط الزجاجي */
+  --glass-blur: blur(18px) saturate(150%);
+  --glass-edge: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,255,255,.04);
+  --glass-shadow: 0 18px 40px rgba(0,0,0,.35);
   --text: #e7ecf7;
   --muted: #95a3c0;
   --accent: #5fd4ff;
@@ -30,6 +34,21 @@ body {
   font-family: var(--font); font-size: 16px; line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }
+/* أضواء ثابتة خلف الصفحة حتى يظهر الزجاج */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background:
+  radial-gradient(900px 600px at 85% 10%, rgba(95,212,255,.16), transparent 60%),
+  radial-gradient(800px 600px at 5% 45%, rgba(139,123,255,.15), transparent 60%),
+  radial-gradient(900px 700px at 70% 95%, rgba(61,220,151,.08), transparent 60%),
+  var(--bg); }
+
+/* سطح زجاجي مشترك */
+.glass, .layer, .device, .tbl, .disclosure, .dataset, .hypo, .controls, .panel, .explain, .kpi,
+.alert-card, .diff-card, .road, .refs li, .btn, .lang-btn, .code {
+  background: var(--panel);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line);
+  box-shadow: var(--glass-edge), var(--glass-shadow);
+}
 a { color: var(--accent); }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 h1, h2, h3 { line-height: 1.35; margin: 0 0 .6em; }
@@ -38,7 +57,7 @@ h3 { font-size: 1.2rem; margin-top: 2.2em; }
 .muted { color: var(--muted); }
 
 /* شريط علوي */
-.topbar { position: sticky; top: 0; z-index: 20; background: rgba(7,11,22,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.topbar { position: sticky; top: 0; z-index: 20; background: rgba(8,14,30,.35); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--line); box-shadow: inset 0 -1px 0 rgba(255,255,255,.05); }
 .topbar-in { display: flex; align-items: center; gap: 20px; height: 60px; }
 .brand { font-weight: 700; font-size: 1.3rem; letter-spacing: .08em; color: var(--text); text-decoration: none; direction: ltr; }
 .brand span { color: var(--accent); }
@@ -49,16 +68,30 @@ h3 { font-size: 1.2rem; margin-top: 2.2em; }
 .lang-btn:hover { border-color: var(--accent); }
 
 /* البطل */
-.hero { padding: 90px 0 70px; background:
-  radial-gradient(800px 400px at 80% -10%, rgba(95,212,255,.18), transparent 60%),
-  radial-gradient(700px 400px at 0% 10%, rgba(139,123,255,.16), transparent 60%); }
+.hero { position: relative; overflow: hidden; min-height: calc(100vh - 60px); min-height: calc(100svh - 60px);
+  display: flex; align-items: center; padding: 70px 0; margin-top: -1px; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; background: #000; }
+.hero-shade { position: absolute; inset: 0; z-index: 0; pointer-events: none; background:
+  linear-gradient(180deg, rgba(5,9,20,.55) 0%, rgba(5,9,20,.15) 40%, rgba(5,9,20,.25) 70%, var(--bg) 100%),
+  radial-gradient(70% 80% at 50% 50%, transparent 40%, rgba(5,9,20,.5) 100%); }
+.hero .hero-glass { position: relative; z-index: 1; width: min(860px, calc(100% - 40px)); margin-inline-start: max(20px, calc((100% - 1180px) / 2 + 20px));
+  padding: 34px 38px; border-radius: 26px;
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+  -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.05), 0 30px 80px rgba(0,0,0,.45); }
+.hero .hero-glass h1 { font-size: clamp(1.5rem, 3vw, 2.3rem); text-shadow: 0 2px 20px rgba(0,0,0,.35); }
+.hero .lede { color: #c9d4ea; }
+.sound-btn { position: absolute; z-index: 2; bottom: 24px; inset-inline-end: 24px; width: 46px; height: 46px; border-radius: 50%;
+  color: var(--text); font-size: 1.15rem; cursor: pointer; display: grid; place-items: center; }
+.sound-btn:hover { border-color: var(--accent); }
 .kicker { color: var(--accent); font-weight: 600; letter-spacing: .04em; margin: 0 0 14px; }
 .hero h1 { font-size: clamp(1.6rem, 3.6vw, 2.7rem); font-weight: 700; max-width: 960px; }
 .lede { font-size: 1.15rem; color: var(--muted); max-width: 820px; }
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0; }
 .btn { display: inline-block; padding: 10px 20px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--text); text-decoration: none; font: inherit; cursor: pointer; }
 .btn:hover { border-color: var(--accent); }
-.btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #061021; border: 0; font-weight: 600; }
+.btn.primary { background: linear-gradient(135deg, rgba(95,212,255,.9), rgba(139,123,255,.85)); color: #061021; border: 1px solid rgba(255,255,255,.35); font-weight: 600; }
 .btn[disabled] { opacity: .6; cursor: wait; }
 .disclaimer { display: inline-block; border: 1px solid rgba(255,93,108,.4); background: rgba(255,93,108,.08); padding: 8px 14px; border-radius: 10px; font-size: .95rem; }
 .legend-status { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
@@ -150,7 +183,7 @@ h3 { font-size: 1.2rem; margin-top: 2.2em; }
 .ticks { padding: 0; list-style: none; }
 .ticks li { padding-inline-start: 26px; position: relative; margin: 8px 0; }
 .ticks li::before { content: "✓"; position: absolute; inset-inline-start: 0; color: var(--built); font-weight: 700; }
-.code { background: #050812; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; overflow-x: auto; font-family: var(--mono); font-size: .88rem; line-height: 1.6; text-align: left; }
+.code { background: rgba(3,6,14,.55); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; overflow-x: auto; font-family: var(--mono); font-size: .88rem; line-height: 1.6; text-align: left; }
 .alerts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .alert-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
 .alert-card p { margin: 10px 0 0; }
@@ -179,6 +212,8 @@ h3 { font-size: 1.2rem; margin-top: 2.2em; }
   .controls { position: static; }
   #nav { display: none; }
   .bars .bar { grid-template-columns: 90px 1fr 90px; }
-  .hero { padding: 56px 0 44px; }
+  .hero { padding: 40px 0; min-height: 88svh; }
+  .hero .hero-glass { width: auto; padding: 26px 22px; border-radius: 20px; margin: 0 16px; }
+  .sound-btn { bottom: 14px; inset-inline-end: 14px; }
   .wrap { padding: 0 16px; }
 }

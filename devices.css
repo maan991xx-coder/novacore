@@ -131,6 +131,16 @@
 .other p { margin: 0; color: var(--muted); font-size: .92rem; }
 .other .live { font-family: var(--mono); color: var(--accent); font-size: 1.1rem; margin-top: 4px; direction: ltr; unicode-bidi: isolate; }
 
+/* ---------- النمط الزجاجي ---------- */
+.device-card, .other, .daybadge, .node .ic, .tabs button, .layer-labels li, .ecg {
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge), var(--glass-shadow);
+}
+.device-card { background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.025)); }
+.layer-labels li { background: rgba(255,255,255,.07); }
+.ecg { background: rgba(3,6,14,.5); }
+.dv-hero { background: none; }
+
 @media (max-width: 900px) {
   .stage, .others { grid-template-columns: 1fr; }
   .flow { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }

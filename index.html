@@ -21,7 +21,14 @@
 
 <main id="top">
   <section class="hero">
-    <div class="wrap">
+    <video class="hero-video" id="heroVideo" poster="media/vitalx-poster.jpg"
+           autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="media/vitalx-trailer.webm" type="video/webm">
+      <source src="media/vitalx-trailer.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <button class="sound-btn glass" id="soundBtn" type="button" aria-label="Sound on / off" aria-pressed="false">🔇</button>
+    <div class="wrap hero-glass glass">
       <p class="kicker" id="heroKicker"></p>
       <h1 id="heroVision"></h1>
       <p class="lede" id="heroScope"></p>
@@ -140,5 +147,17 @@ def cusum_two_sided(z, k=0.5, h=5):
 <script src="content.js"></script>
 <script src="engine.js"></script>
 <script src="app.js"></script>
+<script>
+// زر الصوت لفيديو الخلفية (يبدأ صامتاً لأن المتصفحات تمنع التشغيل التلقائي بالصوت)
+(() => {
+  const v = document.getElementById("heroVideo"), b = document.getElementById("soundBtn");
+  b.addEventListener("click", () => {
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; v.play(); }
+    b.textContent = v.muted ? "🔇" : "🔊";
+    b.setAttribute("aria-pressed", String(!v.muted));
+  });
+})();
+</script>
 </body>
 </html>
