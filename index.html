@@ -7,10 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<!-- هيكل الصفحة فقط. كل النصوص تأتي من content.js -->
+<!-- هيكل الصفحة فقط. كل النصوص تأتي من assets/js/content.js -->
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="#top">VITAL<span>X</span></a>
@@ -21,10 +21,10 @@
 
 <main id="top">
   <section class="hero">
-    <video class="hero-video" id="heroVideo" poster="media/vitalx-poster.jpg"
+    <video class="hero-video" id="heroVideo" poster="assets/media/vitalx-poster.jpg"
            autoplay muted loop playsinline preload="auto" aria-hidden="true">
-      <source src="media/vitalx-trailer.webm" type="video/webm">
-      <source src="media/vitalx-trailer.mp4" type="video/mp4">
+      <source src="assets/media/vitalx-trailer.webm" type="video/webm">
+      <source src="assets/media/vitalx-trailer.mp4" type="video/mp4">
     </video>
     <div class="hero-shade" aria-hidden="true"></div>
     <button class="sound-btn glass" id="soundBtn" type="button" aria-label="Sound on / off" aria-pressed="false">🔇</button>
@@ -144,9 +144,9 @@ def cusum_two_sided(z, k=0.5, h=5):
   <p class="muted" id="footMeta"></p>
 </div></footer>
 
-<script src="content.js"></script>
-<script src="engine.js"></script>
-<script src="app.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/app.js"></script>
 <script>
 // زر الصوت لفيديو الخلفية (يبدأ صامتاً لأن المتصفحات تمنع التشغيل التلقائي بالصوت)
 (() => {
